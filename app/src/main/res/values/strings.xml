@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Weather</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="menu_location_text">Location</string>
+    <string name="menu_one_day_text">One Day</string>
+    <string name="menu_five_days_text">Five Days</string>
+
+    <string name="text_pressure">Pressure</string>
+    <string name="text_wind">Wind</string>
+    <string name="text_sunrise">Sunrise</string>
+    <string name="text_humidity">Humidity</string>
+    <string name="text_visibility">Visibility</string>
+    <string name="text_sunset">Sunset</string>
+
+
 </resources>

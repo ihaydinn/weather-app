@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_layout"
+    app:startDestination="@id/locationFragment">
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.ismailhakkiaydin.weather.LocationFragment"
+        android:label="LocationFragment" />
+    <fragment
+        android:id="@+id/fiveDaysDetailFragment"
+        android:name="com.ismailhakkiaydin.weather.FiveDaysDetailFragment"
+        android:label="FiveDaysDetailFragment" />
+    <fragment
+        android:id="@+id/fiveDaysFragment"
+        android:name="com.ismailhakkiaydin.weather.FiveDaysFragment"
+        android:label="FiveDaysFragment" >
+        <action
+            android:id="@+id/action_fiveDaysFragment_to_fiveDaysDetailFragment"
+            app:destination="@id/fiveDaysDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/oneDayDetailFragment"
+        android:name="com.ismailhakkiaydin.weather.OneDayDetailFragment"
+        android:label="OneDayDetailFragment" />
+    <fragment
+        android:id="@+id/oneDayFragment"
+        android:name="com.ismailhakkiaydin.weather.OneDayFragment"
+        android:label="OneDayFragment" >
+        <action
+            android:id="@+id/action_oneDayFragment_to_oneDayDetailFragment2"
+            app:destination="@id/oneDayDetailFragment" />
+    </fragment>
+</navigation>
