@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="locationGPS"
+            type="com.ismailhakkiaydin.weather.model.WeatherResponse" />
+        <variable
+            name="locationStateExp"
+            type="com.ismailhakkiaydin.weather.model.WeatherResponse.Weather" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -52,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="1000 mb" />
+                    android:text="@{String.valueOf(locationGPS.main.pressure)}" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -95,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="4.1 km/h" />
+                    android:text="@{String.valueOf(locationGPS.wind.speed)}" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -179,7 +188,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="80%" />
+                    android:text="@{String.valueOf(locationGPS.main.humidity)}" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -224,7 +233,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="15km" />
+                    android:text="@{String.valueOf(locationGPS.visibility)}" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -283,8 +292,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="164dp"
-            android:text="30"
-            android:textSize="96sp"
+            android:text="@{String.valueOf(locationGPS.main.temp)}"
+            android:textSize="72sp"
             app:layout_constraintEnd_toEndOf="@+id/crdPressure"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -302,7 +311,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            android:text="Sisli"
+            android:text="@{locationStateExp.description}"
             android:textSize="26sp"
             app:layout_constraintBottom_toTopOf="@+id/crdPressure"
             app:layout_constraintEnd_toEndOf="@+id/tvTemperature"
