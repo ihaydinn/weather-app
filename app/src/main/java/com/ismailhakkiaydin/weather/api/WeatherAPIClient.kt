@@ -1,6 +1,7 @@
 package com.ismailhakkiaydin.weather.api
 
 import com.ismailhakkiaydin.weather.model.WeatherResponse
+import com.ismailhakkiaydin.weather.util.Constant
 import io.reactivex.Single
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -10,21 +11,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class WeatherAPIClient {
 
-    private val BASE_URL = "https://api.openweathermap.org/data/2.5/"
-
     private val api = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(Constant.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(getOkHttpClient())
         .build()
         .create(WeatherAPI::class.java)
 
-    fun getDataFromGps(latitude: String, longitude: String): Single<WeatherResponse> {
-        return api.getWeatherByGPS(latitude, longitude)
+    fun getDataFromGps(latitude: String, longitude: String, units:String): Single<WeatherResponse> {
+        return api.getWeatherByGPS(latitude, longitude, units)
     }
 
-    private fun getOkHttpClient():OkHttpClient{
+    private fun getOkHttpClient(): OkHttpClient {
         val client = OkHttpClient.Builder()
         client.addInterceptor(RequestInterceptor())
         return client.build()

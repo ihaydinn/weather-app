@@ -76,7 +76,7 @@ class WeatherResponse {
 
     class Weather {
         @SerializedName("icon")
-        var ıcon: String? = null
+        var icon: String? = null
         @SerializedName("description")
         var description: String? = null
         @SerializedName("main")

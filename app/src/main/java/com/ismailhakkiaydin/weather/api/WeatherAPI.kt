@@ -10,5 +10,5 @@ import retrofit2.http.Query
 interface WeatherAPI {
 
     @GET("weather?")
-    fun getWeatherByGPS(@Query("lat") latitude:String, @Query("lon") longitude:String): Single<WeatherResponse>
+    fun getWeatherByGPS(@Query("lat") latitude:String, @Query("lon") longitude:String, @Query("units") units:String): Single<WeatherResponse>
 }

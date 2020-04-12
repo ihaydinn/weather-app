@@ -7,9 +7,6 @@
         <variable
             name="locationGPS"
             type="com.ismailhakkiaydin.weather.model.WeatherResponse" />
-        <variable
-            name="locationStateExp"
-            type="com.ismailhakkiaydin.weather.model.WeatherResponse.Weather" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -291,11 +288,11 @@
             android:id="@+id/tvTemperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="164dp"
-            android:text="@{String.valueOf(locationGPS.main.temp)}"
             android:textSize="72sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvState"
             app:layout_constraintEnd_toEndOf="@+id/crdPressure"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.511"
+            app:layout_constraintStart_toStartOf="@+id/crdPressure" />
 
         <TextView
             android:id="@+id/textView2"
@@ -310,35 +307,41 @@
             android:id="@+id/tvState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="@{locationStateExp.description}"
-            android:textSize="26sp"
+            android:layout_marginBottom="24dp"
+            android:text="@{locationGPS.weather.get(0).description}"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/crdPressure"
             app:layout_constraintEnd_toEndOf="@+id/tvTemperature"
             app:layout_constraintHorizontal_bias="0.516"
-            app:layout_constraintStart_toStartOf="@+id/tvTemperature"
-            app:layout_constraintTop_toBottomOf="@+id/tvTemperature"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintStart_toStartOf="@+id/tvTemperature" />
 
         <ImageView
             android:id="@+id/imgState"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/tvTemperature"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTemperature"
             app:layout_constraintEnd_toEndOf="@+id/crdSunrise"
-            app:layout_constraintStart_toStartOf="@+id/crdSunrise"
-            app:srcCompat="@drawable/ic_sun" />
+            app:layout_constraintStart_toStartOf="@+id/crdSunrise" />
 
         <TextView
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Date"
-            android:textSize="26sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{locationGPS.name}"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvDate"
+            app:layout_constraintStart_toStartOf="@+id/tvDate"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

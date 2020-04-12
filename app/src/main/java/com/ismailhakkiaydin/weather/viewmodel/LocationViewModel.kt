@@ -17,33 +17,30 @@ import retrofit2.Response
 
 class LocationViewModel(application: Application) : AndroidViewModel(application) {
 
-   // val currentLocationData by lazy { MutableLiveData<WeatherResponse>() }
+    // val currentLocationData by lazy { MutableLiveData<WeatherResponse>() }
 
     private val apiClient = WeatherAPIClient()
     private val disposable = CompositeDisposable()
 
     val locationData = MutableLiveData<WeatherResponse>()
 
-
-
-    fun getWeatherDataWithGPS(latitude: String, longitude: String) {
+    fun getWeatherDataWithGPS(latitude: String, longitude: String, units: String) {
         disposable.add(
-            apiClient.getDataFromGps(latitude, longitude)
-                .subscribeOn(Schedulers.io())
+            apiClient.getDataFromGps(latitude, longitude, units)
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<WeatherResponse>(){
+                .subscribeWith(object : DisposableSingleObserver<WeatherResponse>() {
                     override fun onSuccess(t: WeatherResponse) {
-                        locationData.value=t
+                        locationData.value = t
                         Log.i("BİLGİ : ", "CALIŞTI")
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.i("BİLGİ : ", "HATA"+e.message +" "+e.printStackTrace())
+                        Log.i("BİLGİ : ", "HATA" + e.message + " " + e.printStackTrace())
 
                     }
                 })
         )
-
     }
 
     override fun onCleared() {

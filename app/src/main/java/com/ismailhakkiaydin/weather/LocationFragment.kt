@@ -1,9 +1,7 @@
 package com.ismailhakkiaydin.weather
 
 
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
 
 import android.os.Bundle
 
@@ -19,17 +17,19 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
 
 import com.ismailhakkiaydin.weather.databinding.FragmentLocationBinding
+import com.ismailhakkiaydin.weather.util.Constant
+import com.ismailhakkiaydin.weather.util.dateConverter
+import com.ismailhakkiaydin.weather.util.timeConverter
 import com.ismailhakkiaydin.weather.viewmodel.LocationViewModel
 import im.delight.android.location.SimpleLocation
 import kotlinx.android.synthetic.main.fragment_location.*
-import mumayank.com.airlocationlibrary.AirLocation
-
 
 class LocationFragment : Fragment() {
 
-    private val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
+    private val REQUEST_CODE = 1
 
     private lateinit var viewModel: LocationViewModel
     private lateinit var dataBinding: FragmentLocationBinding
@@ -46,7 +46,8 @@ class LocationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_location, container, false)
+        dataBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_location, container, false)
         return dataBinding.root
     }
 
@@ -58,10 +59,18 @@ class LocationFragment : Fragment() {
         location = SimpleLocation(context)
         if (!location!!.hasLocationEnabled()) {
             SimpleLocation.openSettings(context)
-        } else{
-            if(ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(activity!!, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),60)
-            }else{
+        } else {
+            if (ContextCompat.checkSelfPermission(
+                    activity!!,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    activity!!,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_CODE
+                )
+            } else {
                 location = SimpleLocation(context)
                 latitude = String.format("%.6f", location?.latitude)
                 longitude = String.format("%.6f", location?.longitude)
@@ -70,11 +79,17 @@ class LocationFragment : Fragment() {
 
             }
         }
-        viewModel.getWeatherDataWithGPS(latitude!!, longitude!!)
+        viewModel.getWeatherDataWithGPS(latitude!!, longitude!!, Constant.METRIC)
 
-        viewModel.locationData.observe(viewLifecycleOwner, Observer {locationGps ->
+        viewModel.locationData.observe(viewLifecycleOwner, Observer { locationGps ->
             locationGps?.let {
-                dataBinding.locationGPS=locationGps
+                dataBinding.locationGPS = locationGps
+                dataBinding.tvTemperature.text = locationGps.main!!.temp.toInt().toString()
+                dataBinding.tvDate.text = dateConverter()
+                dataBinding.tvSunrise.text = timeConverter((locationGps.sys!!.sunrise).toLong())
+                dataBinding.tvSunset.text = timeConverter((locationGps.sys!!.sunset).toLong())
+                dataBinding.imgState.setImageResource(resources.getIdentifier("ic_"+locationGps.weather?.get(0)?.icon, "drawable", view.context.packageName))
+
             }
         })
 
@@ -83,18 +98,19 @@ class LocationFragment : Fragment() {
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
-        if(requestCode == 60){
-            if(grantResults.size > 0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 location = SimpleLocation(context)
                 latitude = String.format("%.6f", location?.latitude)
                 longitude = String.format("%.6f", location?.longitude)
                 Log.e("LAT", "" + latitude)
                 Log.e("LONG", "" + longitude)
 
-                viewModel.getWeatherDataWithGPS(latitude!!, longitude!!)
+                viewModel.getWeatherDataWithGPS(latitude!!, longitude!!, Constant.METRIC)
 
-            }else {
-                Toast.makeText(context, "İzin vereydin de konumunu bulaydık :P", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(context, "İzin vereydin de konumunu bulaydık :P", Toast.LENGTH_LONG)
+                    .show()
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
