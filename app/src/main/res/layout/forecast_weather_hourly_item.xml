@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="forecast"
+            type="com.ismailhakkiaydin.weather.model.ForecastResponse.Forecast" />
+    </data>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_margin="8dp"
         android:orientation="vertical">
 
         <TextView
@@ -12,24 +21,198 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textStyle="bold"
-            android:text="00:00"/>
+            android:text="@{String.valueOf(forecast.dt)}"
+            android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/imgForecastItem"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_sun"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvForecastTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:text="12"/>
+            <TextView
+                android:id="@+id/tvForecastState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="WEATHER"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/tvForecastFeels"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imgForecastItem"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@{forecast.weather.get(0).icon}"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/tvForecastState"
+                app:layout_constraintStart_toStartOf="@+id/tvForecastState"
+                app:layout_constraintTop_toBottomOf="@+id/tvForecastState" />
+
+            <TextView
+                android:id="@+id/tvForecastTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@{String.valueOf(forecast.main.temp)}"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imgForecastItem"
+                app:layout_constraintHorizontal_bias="0.428"
+                app:layout_constraintStart_toStartOf="@+id/imgForecastItem"
+                app:layout_constraintTop_toBottomOf="@+id/imgForecastItem" />
 
 
+            <TextView
+                android:id="@+id/tvCelcius"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="°C"
+                android:textSize="8sp"
+                app:layout_constraintStart_toEndOf="@+id/tvForecastTemp"
+                app:layout_constraintTop_toTopOf="@+id/tvForecastTemp" />
+
+            <TextView
+                android:id="@+id/tvForecastFeels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="FEELS"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/textForecastHumidity"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvForecastState"
+                app:layout_constraintTop_toTopOf="@+id/tvForecastState" />
+
+            <ImageView
+                android:id="@+id/imgForecastFeels"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@{forecast.weather.get(0).icon}"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/tvForecastFeels"
+                app:layout_constraintStart_toStartOf="@+id/tvForecastFeels"
+                app:layout_constraintTop_toBottomOf="@+id/tvForecastFeels" />
+
+            <TextView
+                android:id="@+id/tvForecastFeelsTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(forecast.main.feelsLike)}"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvForecastTemp"
+                app:layout_constraintEnd_toEndOf="@+id/imgForecastFeels"
+                app:layout_constraintStart_toStartOf="@+id/imgForecastFeels"
+                app:layout_constraintTop_toBottomOf="@+id/imgForecastFeels" />
+
+            <TextView
+                android:id="@+id/textForecastHumidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="HUMIDITY"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/textForecastPressure"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvForecastFeels"
+                app:layout_constraintTop_toTopOf="@+id/tvForecastFeels" />
+
+            <ImageView
+                android:id="@+id/imgForecastHumidty"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@{forecast.weather.get(0).icon}"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/textForecastHumidity"
+                app:layout_constraintStart_toStartOf="@+id/textForecastHumidity"
+                app:layout_constraintTop_toBottomOf="@+id/textForecastHumidity" />
+
+            <TextView
+                android:id="@+id/tvForecastHumidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(forecast.main.humidity)}"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvForecastFeelsTemp"
+                app:layout_constraintEnd_toEndOf="@+id/imgForecastHumidty"
+                app:layout_constraintStart_toStartOf="@+id/imgForecastHumidty"
+                app:layout_constraintTop_toBottomOf="@+id/imgForecastHumidty" />
+
+            <TextView
+                android:id="@+id/textForecastPressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="PRESSURE"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/textForecastWind"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textForecastHumidity"
+                app:layout_constraintTop_toTopOf="@+id/textForecastHumidity" />
+
+            <ImageView
+                android:id="@+id/imgForecastPressure"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@{forecast.weather.get(0).icon}"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/textForecastPressure"
+                app:layout_constraintStart_toStartOf="@+id/textForecastPressure"
+                app:layout_constraintTop_toBottomOf="@+id/textForecastPressure" />
+
+            <TextView
+                android:id="@+id/tvForecastPressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(forecast.main.pressure)}"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvForecastHumidity"
+                app:layout_constraintEnd_toEndOf="@+id/imgForecastPressure"
+                app:layout_constraintStart_toStartOf="@+id/imgForecastPressure"
+                app:layout_constraintTop_toBottomOf="@+id/imgForecastPressure" />
+
+            <TextView
+                android:id="@+id/textForecastWind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="WIND"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textForecastPressure"
+                app:layout_constraintTop_toTopOf="@+id/textForecastPressure" />
+
+            <ImageView
+                android:id="@+id/imgForecastWind"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@{forecast.weather.get(0).icon}"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/textForecastWind"
+                app:layout_constraintStart_toStartOf="@+id/textForecastWind"
+                app:layout_constraintTop_toBottomOf="@+id/textForecastWind" />
+
+            <TextView
+                android:id="@+id/tvForecastWind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(forecast.wind.speed)}"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvForecastPressure"
+                app:layout_constraintEnd_toEndOf="@+id/imgForecastWind"
+                app:layout_constraintStart_toStartOf="@+id/imgForecastWind"
+                app:layout_constraintTop_toBottomOf="@+id/imgForecastWind" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </layout>
