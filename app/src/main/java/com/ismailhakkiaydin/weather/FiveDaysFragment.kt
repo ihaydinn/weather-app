@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ismailhakkiaydin.weather.adapter.HourlyAdapter
 
 import com.ismailhakkiaydin.weather.util.Constant
+import com.ismailhakkiaydin.weather.util.dayConverter
 import com.ismailhakkiaydin.weather.viewmodel.FiveDaysViewModel
 import im.delight.android.location.SimpleLocation
 import kotlinx.android.synthetic.main.fragment_five_days.*
@@ -79,6 +80,7 @@ class FiveDaysFragment : Fragment() {
         viewModel.forecastData.observe(viewLifecycleOwner, Observer { forecastGps ->
             forecastGps?.let {
                 hourlyAdapter.updateHourlyList(forecastGps)
+
             }
         })
     }
