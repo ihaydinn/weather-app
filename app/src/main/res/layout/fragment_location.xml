@@ -10,9 +10,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lytLocation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_background_day"
+        layoutBackgroundImage="@{locationGPS.weather.get(0).icon}"
         tools:context=".LocationFragment">
 
         <View

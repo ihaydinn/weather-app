@@ -28,8 +28,8 @@
         android:label="OneDayDetailFragment" />
     <fragment
         android:id="@+id/oneDayFragment"
-        android:name="com.ismailhakkiaydin.weather.OneDayFragment"
-        tools:layout="@layout/fragment_one_day"
+        android:name="com.ismailhakkiaydin.weather.CityDailyFragment"
+        tools:layout="@layout/fragment_city_daily"
         android:label="OneDayFragment" >
         <action
             android:id="@+id/action_oneDayFragment_to_oneDayDetailFragment2"
