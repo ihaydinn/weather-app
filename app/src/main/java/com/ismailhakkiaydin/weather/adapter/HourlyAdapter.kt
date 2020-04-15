@@ -1,5 +1,7 @@
 package com.ismailhakkiaydin.weather.adapter
 
+import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -8,6 +10,7 @@ import com.ismailhakkiaydin.weather.R
 import com.ismailhakkiaydin.weather.databinding.ForecastWeatherHourlyItemBinding
 import com.ismailhakkiaydin.weather.model.ForecastResponse
 import com.ismailhakkiaydin.weather.util.dayConverter
+import kotlin.math.roundToInt
 
 class HourlyAdapter(val hourlyList: ArrayList<ForecastResponse.Forecast>) :
     RecyclerView.Adapter<HourlyAdapter.HourlyViewHolder>() {
@@ -38,6 +41,7 @@ class HourlyAdapter(val hourlyList: ArrayList<ForecastResponse.Forecast>) :
         holder.view.tvForecastTime.text = dayConverter((hourlyList[position].dt).toLong())
         holder.view.tvForecastTemp.text = hourlyList[position].main!!.temp.toInt().toString()
         holder.view.tvForecastFeelsTemp.text = hourlyList[position].main!!.feelsLike.toInt().toString()
+
 
     }
 
