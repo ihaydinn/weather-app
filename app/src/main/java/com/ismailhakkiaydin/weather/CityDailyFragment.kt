@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ismailhakkiaydin.weather.adapter.CityDailyAdapter
 import com.ismailhakkiaydin.weather.databinding.FragmentCityDailyBinding
@@ -31,11 +33,11 @@ class CityDailyFragment : Fragment() {
 
     private lateinit var viewModel :CityDailyViewModel
     private lateinit var dataBinding: FragmentCityDailyBinding
-    private val cityDailyAdapter = CityDailyAdapter(arrayListOf())
+
+    private var cityDailyAdapter = CityDailyAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -49,10 +51,10 @@ class CityDailyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        viewModel = ViewModelProviders.of(this).get(CityDailyViewModel::class.java)
-
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter=cityDailyAdapter
+        recyclerView.adapter = cityDailyAdapter
+
+        viewModel = ViewModelProviders.of(this).get(CityDailyViewModel::class.java)
 
         location = SimpleLocation(context)
         if (!location!!.hasLocationEnabled()) {
@@ -82,11 +84,9 @@ class CityDailyFragment : Fragment() {
 
         viewModel.cityDailyData.observe(viewLifecycleOwner, Observer {cityDailyWeatherGps ->
             cityDailyWeatherGps.let {
-                cityDailyAdapter.updateCityDailyLis(cityDailyWeatherGps)
-
+                cityDailyAdapter.updateCountryList(cityDailyWeatherGps)
             }
         })
-
     }
 
     override fun onRequestPermissionsResult(

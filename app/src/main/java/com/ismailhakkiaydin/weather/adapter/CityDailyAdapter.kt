@@ -1,15 +1,21 @@
 package com.ismailhakkiaydin.weather.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.ismailhakkiaydin.weather.R
 import com.ismailhakkiaydin.weather.databinding.ForecastWeatherDailyItemBinding
 import com.ismailhakkiaydin.weather.model.CityDailyResponse
+import kotlinx.android.synthetic.main.forecast_weather_daily_item.view.*
 
 class CityDailyAdapter(val cityDailyList: ArrayList<CityDailyResponse.Forecast>) :
     RecyclerView.Adapter<CityDailyAdapter.CityDailyViewHolder>() {
+
     class CityDailyViewHolder(var view: ForecastWeatherDailyItemBinding) :
         RecyclerView.ViewHolder(view.root) {
 
@@ -35,11 +41,17 @@ class CityDailyAdapter(val cityDailyList: ArrayList<CityDailyResponse.Forecast>)
 
         holder.view.tvCityTemp.text = cityDailyList[position].main!!.temp.toInt().toString()
 
+        holder.itemView.setOnClickListener {
+            val bundle = bundleOf("cityWeatherDetail" to cityDailyList[position])
+            Navigation.findNavController(it).navigate(R.id.action_oneDayFragment_to_oneDayDetailFragment2, bundle)
+        }
     }
 
-    fun updateCityDailyLis(newCityDailyList: List<CityDailyResponse.Forecast>) {
+    fun updateCountryList(newCountryList: List<CityDailyResponse.Forecast>) {
         cityDailyList.clear()
-        cityDailyList.addAll(newCityDailyList)
+        cityDailyList.addAll(newCountryList)
         notifyDataSetChanged()
     }
+
+
 }

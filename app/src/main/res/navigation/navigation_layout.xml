@@ -9,23 +9,21 @@
         android:name="com.ismailhakkiaydin.weather.LocationFragment"
         tools:layout="@layout/fragment_location"
         android:label="LocationFragment" />
-    <fragment
-        android:id="@+id/fiveDaysDetailFragment"
-        android:name="com.ismailhakkiaydin.weather.FiveDaysDetailFragment"
-        android:label="FiveDaysDetailFragment" />
+
     <fragment
         android:id="@+id/fiveDaysFragment"
         android:name="com.ismailhakkiaydin.weather.FiveDaysFragment"
         tools:layout="@layout/fragment_five_days"
         android:label="FiveDaysFragment" >
-        <action
-            android:id="@+id/action_fiveDaysFragment_to_fiveDaysDetailFragment"
-            app:destination="@id/fiveDaysDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/oneDayDetailFragment"
-        android:name="com.ismailhakkiaydin.weather.OneDayDetailFragment"
-        android:label="OneDayDetailFragment" />
+        android:name="com.ismailhakkiaydin.weather.CityDailyDetailFragment"
+        android:label="OneDayDetailFragment" >
+        <argument
+            android:name="cityWeatherDetail"
+            app:argType="com.ismailhakkiaydin.weather.model.CityDailyResponse" />
+    </fragment>
     <fragment
         android:id="@+id/oneDayFragment"
         android:name="com.ismailhakkiaydin.weather.CityDailyFragment"

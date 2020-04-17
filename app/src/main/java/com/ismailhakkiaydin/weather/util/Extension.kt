@@ -1,7 +1,9 @@
 package com.ismailhakkiaydin.weather.util
 
 import android.graphics.drawable.Drawable
+import android.media.Image
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
@@ -31,6 +33,20 @@ fun dayConverter(time: Long) : String{
     var convertedDay = converter.format(Date(time*1000))
 
     return convertedDay
+}
+
+@BindingAdapter("android:dayConverter")
+fun convertToDay(view: TextView, value:Long){
+    var converter = SimpleDateFormat("EEE, d MMM yyyy hh:mm a")
+    var convertedDay = converter.format(Date(value*1000))
+    view.text = convertedDay
+}
+
+@BindingAdapter("android:converterInt")
+fun convertToInt(view: TextView, value:Double){
+    var valueInt = value.toInt()
+    var valueStrin = valueInt.toString()
+    view.text = valueStrin
 }
 
 @BindingAdapter("layoutBackgroundImage")
