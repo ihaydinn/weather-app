@@ -18,8 +18,10 @@ class CityDailyViewModel(application: Application) : AndroidViewModel(applicatio
 
     val cityDailyData = MutableLiveData<List<CityDailyResponse.Forecast>>()
     var cityDailyDataList: List<CityDailyResponse.Forecast> = ArrayList()
+    val cityDailyLoading = MutableLiveData<Boolean>()
 
     fun getCityDailyWeatherFromGps(latitude: String, longitude: String, cnt: String, units: String) {
+        cityDailyLoading.value = true
         disposable.add(
             apiClient.getCityDailyWeatherFromGps(latitude, longitude, cnt, units)
                 .subscribeOn(Schedulers.newThread())
@@ -29,6 +31,7 @@ class CityDailyViewModel(application: Application) : AndroidViewModel(applicatio
                         var cityDailyResponse = t
                         cityDailyDataList = cityDailyResponse.list!!
                         cityDailyData.value = cityDailyDataList
+                        cityDailyLoading.value = false
                         Log.i("Daily Data : ", "Çalıştı")
                     }
 

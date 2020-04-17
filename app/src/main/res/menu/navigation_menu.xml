@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/fiveDaysFragment"
-        android:icon="@drawable/ic_five_days"
-        android:title="@string/menu_five_days_text"
-        app:showAsAction="always" />
-    <item
         android:id="@+id/oneDayFragment"
         android:icon="@drawable/ic_one_day"
         android:title="@string/menu_one_day_text"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/fiveDaysFragment"
+        android:icon="@drawable/ic_five_days"
+        android:title="@string/menu_five_days_text"
         app:showAsAction="always" />
     <item
         android:id="@+id/locationFragment"

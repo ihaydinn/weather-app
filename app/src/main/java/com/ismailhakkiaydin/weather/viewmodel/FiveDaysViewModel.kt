@@ -21,8 +21,10 @@ class FiveDaysViewModel(application: Application) : AndroidViewModel(application
 
     val forecastData = MutableLiveData<List<ForecastResponse.Forecast>>()
     var forecastDataList : List<ForecastResponse.Forecast> = ArrayList()
+    val fiveDaysLoading = MutableLiveData<Boolean>()
 
     fun getForecastFromGps(latitude: String, longitude: String, units: String) {
+        fiveDaysLoading.value = true
         disposable.add(
             apiClient.getForecastFromGps(latitude, longitude, units)
                 .subscribeOn(Schedulers.newThread())
@@ -32,7 +34,7 @@ class FiveDaysViewModel(application: Application) : AndroidViewModel(application
                         var forecastResponse = t
                         forecastDataList = forecastResponse.list!!
                         forecastData.value = forecastDataList
-
+                        fiveDaysLoading.value = false
                         Log.i("BİLGİ : ", "CALIŞTI")
                     }
 

@@ -25,6 +25,7 @@ import com.ismailhakkiaydin.weather.util.dateConverter
 import com.ismailhakkiaydin.weather.util.timeConverter
 import com.ismailhakkiaydin.weather.viewmodel.LocationViewModel
 import im.delight.android.location.SimpleLocation
+import kotlinx.android.synthetic.main.fragment_five_days.*
 import kotlinx.android.synthetic.main.fragment_location.*
 
 class LocationFragment : Fragment() {
@@ -83,6 +84,7 @@ class LocationFragment : Fragment() {
 
         viewModel.locationData.observe(viewLifecycleOwner, Observer { locationGps ->
             locationGps?.let {
+                lytLocation.visibility = View.VISIBLE
                 dataBinding.locationGPS = locationGps
                 dataBinding.tvTemperature.text = locationGps.main!!.temp.toInt().toString()
                 dataBinding.tvDate.text = dateConverter()
@@ -90,6 +92,17 @@ class LocationFragment : Fragment() {
                 dataBinding.tvSunset.text = timeConverter((locationGps.sys!!.sunset).toLong())
                 dataBinding.imgState.setImageResource(resources.getIdentifier("ic_"+locationGps.weather?.get(0)?.icon, "drawable", view.context.packageName))
 
+            }
+        })
+
+        viewModel.locationLoading.observe(viewLifecycleOwner, Observer { loading ->
+            loading?.let {
+                if (it){
+                    locationLoading.visibility = View.VISIBLE
+                    lytLocation.visibility = View.GONE
+                }else{
+                    locationLoading.visibility = View.GONE
+                }
             }
         })
 

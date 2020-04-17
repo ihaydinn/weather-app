@@ -23,8 +23,10 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
     private val disposable = CompositeDisposable()
 
     val locationData = MutableLiveData<WeatherResponse>()
+    val locationLoading = MutableLiveData<Boolean>()
 
     fun getWeatherDataWithGPS(latitude: String, longitude: String, units: String) {
+        locationLoading.value = true
         disposable.add(
             apiClient.getDataFromGps(latitude, longitude, units)
                 .subscribeOn(Schedulers.newThread())
@@ -32,6 +34,7 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
                 .subscribeWith(object : DisposableSingleObserver<WeatherResponse>() {
                     override fun onSuccess(t: WeatherResponse) {
                         locationData.value = t
+                        locationLoading.value = false
                         Log.i("BİLGİ : ", "CALIŞTI")
                     }
 

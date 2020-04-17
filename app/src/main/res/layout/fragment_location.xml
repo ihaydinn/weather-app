@@ -10,11 +10,15 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lytLocation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        layoutBackgroundImage="@{locationGPS.weather.get(0).icon}"
         tools:context=".LocationFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lytLocation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layoutBackgroundImage="@{locationGPS.weather.get(0).icon}">
 
         <View
             android:id="@+id/locationBacgroundView"
@@ -343,6 +347,21 @@
             app:layout_constraintEnd_toEndOf="@+id/tvDate"
             app:layout_constraintStart_toStartOf="@+id/tvDate"
             app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/locationLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+        </ProgressBar>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

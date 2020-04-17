@@ -79,10 +79,24 @@ class FiveDaysFragment : Fragment() {
 
         viewModel.forecastData.observe(viewLifecycleOwner, Observer { forecastGps ->
             forecastGps?.let {
+                crdFiveDays.visibility = View.VISIBLE
                 hourlyAdapter.updateHourlyList(forecastGps)
 
             }
         })
+
+        viewModel.fiveDaysLoading.observe(viewLifecycleOwner, Observer { loading ->
+            loading?.let {
+                if(it){
+                   fiveDaysLoading.visibility = View.VISIBLE
+                    crdFiveDays.visibility = View.GONE
+                }else{
+                    fiveDaysLoading.visibility = View.GONE
+                }
+            }
+
+        })
+
     }
 
     override fun onRequestPermissionsResult(

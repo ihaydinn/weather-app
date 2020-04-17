@@ -84,9 +84,22 @@ class CityDailyFragment : Fragment() {
 
         viewModel.cityDailyData.observe(viewLifecycleOwner, Observer {cityDailyWeatherGps ->
             cityDailyWeatherGps.let {
+                recyclerView.visibility = View.VISIBLE
                 cityDailyAdapter.updateCountryList(cityDailyWeatherGps)
             }
         })
+
+        viewModel.cityDailyLoading.observe(viewLifecycleOwner, Observer { loading ->
+            loading?.let {
+                if (it){
+                    cityDailyLoading.visibility = View.VISIBLE
+                    recyclerView.visibility = View.GONE
+                }else{
+                    cityDailyLoading.visibility = View.GONE
+                }
+            }
+        })
+
     }
 
     override fun onRequestPermissionsResult(
