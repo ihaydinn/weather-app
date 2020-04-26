@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/badge/platform-Android-green)](https://www.android.com/) [![API](https://img.shields.io/badge/API-+23-brightgreen)](https://android-arsenal.com/api?level=23) [![API](https://img.shields.io/badge/license-MIT-blue)](https://android-arsenal.com/api?level=23)
+[![Build Status](https://img.shields.io/badge/platform-Android-green)](https://www.android.com/) [![API](https://img.shields.io/badge/API-+23-brightgreen)](https://android-arsenal.com/api?level=23) [![API](https://img.shields.io/badge/license-MIT-blue)]()
 
 <img src="http://ismailhakkiaydin.com/wp-content/uploads/2020/04/logo.png" align="center">
 
@@ -50,6 +50,11 @@ you can follow this path and use the API you obtained from OpenWeatherMap.
 
 # Design
 I tried to make the design as good as I could for me :) I tried to be inspired by [Freepik](https://www.freepik.com/) and [Flaticon](https://www.flaticon.com/) sites.
+
+# Support
+If you want to support, I drink your coffee. :blush: :coffee: 
+
+[<img src="http://ismailhakkiaydin.com/wp-content/uploads/2020/04/patreon.png">](https://www.patreon.com/ihaydinn)
 
 # Contact
 - [Blog](www.ismailhakkiaydin.com)
