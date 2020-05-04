@@ -57,9 +57,9 @@ If you want to support, I drink your coffee. :blush: :coffee:
 [<img src="http://ismailhakkiaydin.com/wp-content/uploads/2020/04/patreon.png">](https://www.patreon.com/ihaydinn)
 
 # Contact
-- [Blog](www.ismailhakkiaydin.com)
-- [Twitter](www.twitter.com/ihaydinn)
-- [Linkedin](www.linkedin.com/in/ihaydinn)
+- [Blog](http://ismailhakkiaydin.com)
+- [Twitter](https://twitter.com/ihaydinn)
+- [Linkedin](https://linkedin.com/in/ihaydinn)
 - [Medium](https://medium.com/@ihaydinn)
 - [About Me](https://about.me/ismailhakkiaydin)
 
